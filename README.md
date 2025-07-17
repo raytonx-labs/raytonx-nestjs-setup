@@ -5,7 +5,31 @@
 1. [Prettier + ESLint](https://github.com/raytonx-labs/raytonx-config?tab=readme-ov-file#1-prettier--eslint)
 2. [husky & lint-staged](https://github.com/raytonx-labs/raytonx-config?tab=readme-ov-file#2-husky--lint-staged)
 
-## 2. Scheduler Module
+## 2. Database Module
+
+1. `MongoDbService` - A service for interacting with MongoDB.
+
+### Usage
+
+```ts
+import { MongoDbService } from "@/modules/db/mongodb/mongodb.service";
+import { Injectable, Logger } from "@nestjs/common";
+
+@Injectable()
+export class XXService {
+  private readonly logger = new Logger(XXService.name);
+
+  constructor(private readonly db: MongoDbService) {}
+
+  async handle() {
+    const raw = await this.db.find("projects");
+
+    this.logger.log(`Fetched ${raw.length} documents from raw MongoDB.`);
+  }
+}
+```
+
+## 3. Scheduler Module
 
 The Scheduler Module is responsible for scheduling tasks at specific times. It uses the `@nestjs/schedule` package to achieve this.
 
